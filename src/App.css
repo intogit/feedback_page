@@ -1,0 +1,9 @@
+.App{
+  margin: 2rem;
+}
+
+.feedbackform{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
