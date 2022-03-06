@@ -3,11 +3,13 @@ import "./App.css";
 import Button from "@mui/material/Button";
 import { Container, Grid, CardMedia, TextField } from "@mui/material";
 import video from "./feed_video.mp4";
-import { borderColor, Box, maxWidth } from "@mui/system";
-import { green, lightGreen } from "@mui/material/colors";
+import { borderColor, Box, fontFamily, maxWidth } from "@mui/system";
 import Slider from "@mui/material/Slider";
 import SvgIcon from "@mui/material/SvgIcon";
 // import SendIcon from "@material-ui/icons/SendIcon";
+import Rating from "@mui/material/Rating";
+import Typography from "@mui/material/Typography";
+
 
 function Sendbtn(props) {
   return (
@@ -72,18 +74,21 @@ function valuetext(value) {
 }
 
 function App() {
+  const [management, setManagement] = React.useState(0);
+  const [travel, setTravel] = React.useState(0);
+  const [safety, setSafety] = React.useState(0);
+  const [accommodation, setAccommodation] = React.useState(0);
+  const [guide, setGuide] = React.useState(0);
+
   return (
     <div className="App">
       <div className="feedbackform">
-        <Box sx={{px:2}}>
+        <Box sx={{px:2, maxWidth: "40%"}}>
           <Box>
             <CardMedia
               sx={{
-                
                 maxWidth: "450px",
                 bgcolor: "grey",
-                // boxShadow: 2,
-                // border: 1,
                 borderColor: "primary.main",
               }}
               component="video"
@@ -92,18 +97,20 @@ function App() {
             ></CardMedia>
           </Box>
         </Box>
-        <Box
-          sx={{ py:2}}
-        >
-          <Box sx={{ color: "#03396e", maxWidth:"500px" }}>
+        <Box sx={{ minWidth: "50%" }}>
+          <Box
+            sx={{
+              color: "#03396e",
+            }}
+          >
             <h2>How satisfied your are ??</h2>
           </Box>
-          <Box sx={{ py: 3 }}>
+          <Box sx={{ py: 1 }}>
             <Box>
-              <Box sx={{ maxWidth: "490px" }}>
+              <Box>
                 <Slider
                   aria-label="Custom marks"
-                  defaultValue={20}
+                  defaultValue={0}
                   getAriaValueText={valuetext}
                   step={10}
                   valueLabelDisplay="off"
@@ -111,33 +118,107 @@ function App() {
                 />
               </Box>
             </Box>
-            <Box display="flex" color='#03396e' justifyContent="space-between" fontSize="13px" maxWidth="490px">
-              <Box>Not at all likely</Box>
-              <Box>Extreamely likely</Box>
+            <Box
+              display="flex"
+              color="#03396e"
+              justifyContent="space-between"
+              fontSize="13px"
+            >
+              <Box sx={{fontFamily:"poppins", fontWeight:1000, opacity:.7}}>Not at all likely</Box>
+              <Box sx={{fontFamily:"poppins", fontWeight:1000, opacity:.7}}>Extreamely likely</Box>
             </Box>
           </Box>
-          <Box maxWidth="500px" component="form">
+          <Box sx={{my:2}}>
+            <Box
+              sx={{
+                color: "#03396e",
+              }}
+            >
+              <h3>Our Services</h3>
+            </Box>
+            <Box display="flex" justifyContent="space-between" flexWrap="wrap">
+              <Box sx={{pr:3}}>
+                <Typography component="legend" sx={{fontFamily:"poppins", fontWeight:1000, opacity:.7}}>Travel</Typography>
+                <Rating
+                  name="travel"
+                  value={travel}
+                  onChange={(event, newValue) => {
+                    setTravel(newValue);
+                  }}
+                />
+              </Box>
+              <Box sx={{pr:3}}>
+                <Typography component="legend" sx={{fontFamily:"poppins", fontWeight:1000, opacity:.7}}>Guide</Typography>
+                <Rating
+                  name="guide"
+                  value={guide}
+                  onChange={(event, newValue) => {
+                    setGuide(newValue);
+                  }}
+                />
+              </Box>
+              <Box sx={{pr:3}}>
+                <Typography component="legend" sx={{fontFamily:"poppins", fontWeight:1000, opacity:.7}}>Accommodation</Typography>
+                <Rating
+                  name="accommodation"
+                  value={accommodation}
+                  onChange={(event, newValue) => {
+                    setAccommodation(newValue);
+                  }}
+                />
+              </Box>
+              <Box sx={{pr:3}}>
+                <Typography component="legend" sx={{fontFamily:"poppins", fontWeight:1000, opacity:.7}}>Management</Typography>
+                <Rating
+                  name="management"
+                  value={management}
+                  onChange={(event, newValue) => {
+                    setManagement(newValue);
+                  }}
+                />
+              </Box>
+              <Box sx={{pr:3}}>
+                <Typography component="legend" sx={{fontFamily:"poppins", fontWeight:1000, opacity:.7}}>Safety</Typography>
+                <Rating
+                  name="safety"
+                  value={safety}
+                  onChange={(event, newValue) => {
+                    setSafety(newValue);
+                  }}
+                />
+              </Box>
+            </Box>
+          </Box>
+          <form>
+          <Box
+            component="form"
+          >
             <TextField
               id="filled-multiline-static"
-              label="Any message ?"
+              label="Please provide your valuable feedback"
               multiline
-              rows={5}
-              variant="filled"
+              rows={3}
               sx={{
-                color:"#03396e",
-                bgcolor: "#e9f5f9",
-                minWidth: "100%"
+                mt: 2,
+                color: "#03396e",
+                minWidth: "100%",
               }}
             />
           </Box>
-          <Box display="flex" justifyContent="flex-end" sx={{ mt: 1,}}>
-            <Button  variant="contained" sx={{px:3, fontSize:'15px'}} endIcon={<Sendbtn />}>
+          <Box display="block" sx={{ mt: 2 }}>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{width: "100%", fontSize: "15px" }}
+              endIcon={<Sendbtn />}
+            >
               Send
             </Button>
             {/* <Button variant="contained" sx={{px:3, fontSize:'15px'}} endIcon={<SendIcon />}>
               Send
             </Button> */}
           </Box>
+          </form>
         </Box>
       </div>
     </div>
